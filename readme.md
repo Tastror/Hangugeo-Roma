@@ -13,3 +13,5 @@ pyinstaller -F -w hankukeo-UI.py
 ## How to use?
 
 Open the hankukeo-UI.exe (or just use cmd to run `python hankukeo-UI.py`), type in the left and you'll see output in the right.
+
+![Screenshot 2022-07-18 193426](https://s2.loli.net/2022/07/18/PC8r3B6MLY4muhs.png)
