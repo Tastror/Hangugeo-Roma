@@ -59,7 +59,7 @@ def roma(korean, use_separate) -> dict:
         elif mem in sok:
             res.append(hankukeo_dict["sok"][mem])
             now = True
-        elif mem in cheot and mem != "　":
+        elif mem in kkeut and mem != "　":
             res.append(hankukeo_dict["kkeut"][mem])
             now = True
         else:
