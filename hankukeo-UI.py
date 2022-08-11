@@ -5,6 +5,7 @@ import hankukeo
 class HankukeoFrame(wx.Frame):
 
     placeholder = None
+    separate = False
 
     def __init__(self, *args, **kw):
 
@@ -42,6 +43,7 @@ class HankukeoFrame(wx.Frame):
         # file menu
         file_menu = wx.Menu()
         usage_item = file_menu.Append(-1, "&Usage...\tCtrl-U", "Usage about this UI")
+        self.separate_item = file_menu.Append(-1, "&Separate...\tCtrl-P", "Separate the letter with prime(')", wx.ITEM_CHECK)
         file_menu.AppendSeparator()
         exit_item = file_menu.Append(wx.ID_EXIT)
 
@@ -66,6 +68,7 @@ class HankukeoFrame(wx.Frame):
         self.Bind(wx.EVT_MENU, self.on_usage, usage_item)
         self.Bind(wx.EVT_MENU, self.on_exit, exit_item)
         self.Bind(wx.EVT_MENU, self.on_about, about_item)
+        self.Bind(wx.EVT_MENU, self.on_separate, self.separate_item)
 
     def on_exit(self, event):
         self.Close(True)
@@ -77,12 +80,20 @@ class HankukeoFrame(wx.Frame):
             "Usage"
         )
 
+    def on_separate(self, event):
+        if self.separate_item.IsChecked():
+            self.separate = True
+            self.update(None)
+        else:
+            self.separate = False
+            self.update(None)
+
     def on_about(self, event):
         self.placeholder = None
         wx.MessageBox("Welcome to use Hankukeo-UI", "About Hankukeo-UI", wx.OK | wx.ICON_INFORMATION)
 
     def update(self, event):
-        self.show_textbox.SetValue(hankukeo.roma(self.type_in_textbox.GetValue())["res_str"])
+        self.show_textbox.SetValue(hankukeo.roma(self.type_in_textbox.GetValue(), self.separate)["res_str"])
 
 
 if __name__ == '__main__':
