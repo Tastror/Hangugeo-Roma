@@ -1,8 +1,8 @@
 import wx
-import hankukeo
+import hangugeo
 
 
-class HankukeoFrame(wx.Frame):
+class HangugeoFrame(wx.Frame):
 
     placeholder = None
     separate = False
@@ -10,7 +10,7 @@ class HankukeoFrame(wx.Frame):
     def __init__(self, *args, **kw):
 
         # ensure the parent's __init__ is called
-        super(HankukeoFrame, self).__init__(*args, **kw)
+        super(HangugeoFrame, self).__init__(*args, **kw)
 
         # create a panel in the frame
         pnl = wx.Panel(self)
@@ -35,7 +35,7 @@ class HankukeoFrame(wx.Frame):
 
         # create a status bar
         self.CreateStatusBar()
-        self.SetStatusText("Welcome to use Hankukeo-UI!")
+        self.SetStatusText("Welcome to use Hangugeo-UI!")
 
     # Bars
     def menu_bar_init(self):
@@ -76,7 +76,7 @@ class HankukeoFrame(wx.Frame):
     def on_usage(self, event):
         self.placeholder = None
         wx.MessageBox(
-            "Type Hankeur (Hangul, Hangeul) in the left, and the Roman-Form will be show in the right.",
+            "Type Hangul in the left, and the Roman-Form will be show in the right.",
             "Usage"
         )
 
@@ -90,14 +90,14 @@ class HankukeoFrame(wx.Frame):
 
     def on_about(self, event):
         self.placeholder = None
-        wx.MessageBox("Welcome to use Hankukeo-UI", "About Hankukeo-UI", wx.OK | wx.ICON_INFORMATION)
+        wx.MessageBox("Welcome to use Hangugeo-UI", "About Hangugeo-UI", wx.OK | wx.ICON_INFORMATION)
 
     def update(self, event):
-        self.show_textbox.SetValue(hankukeo.roma(self.type_in_textbox.GetValue(), self.separate)["res_str"])
+        self.show_textbox.SetValue(hangugeo.roma(self.type_in_textbox.GetValue(), self.separate)["res_str"])
 
 
 if __name__ == '__main__':
     app = wx.App()
-    frm = HankukeoFrame(None, title='Hankukeo-UI')
+    frm = HangugeoFrame(None, title='Hangugeo-UI')
     frm.Show()
     app.MainLoop()

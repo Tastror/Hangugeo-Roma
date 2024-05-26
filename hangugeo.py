@@ -2,65 +2,65 @@ import json
 import pathlib
 from functools import reduce
 
-hankukeo_dict = {}
+hangugeo_dict = {}
 
-cheot = (
+start = (
     "ㄱ", "ㄲ", "ㄴ", "ㄷ", "ㄸ", "ㄹ", "ㅁ", "ㅂ", "ㅃ", "ㅅ",
     "ㅆ", "ㅇ", "ㅈ", "ㅉ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
 )
-sok = (
+mid = (
     "ㅏ", "ㅐ", "ㅑ", "ㅒ", "ㅓ", "ㅔ", "ㅕ", "ㅖ", "ㅗ", "ㅘ",
     "ㅙ", "ㅚ", "ㅛ", "ㅜ", "ㅝ", "ㅞ", "ㅟ", "ㅠ", "ㅡ", "ㅢ",
     "ㅣ"
 )
-kkeut = (
-    "　", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ",
+end = (
+    " ", "ㄱ", "ㄲ", "ㄳ", "ㄴ", "ㄵ", "ㄶ", "ㄷ", "ㄹ", "ㄺ",
     "ㄻ", "ㄼ", "ㄽ", "ㄾ", "ㄿ", "ㅀ", "ㅁ", "ㅂ", "ㅄ", "ㅅ",
     "ㅆ", "ㅇ", "ㅈ", "ㅊ", "ㅋ", "ㅌ", "ㅍ", "ㅎ"
 )
 
 
 def divide(single_korean) -> dict:
-    global hankukeo_dict
-    if hankukeo_dict is not None:
-        with open("hankukeo.json", 'r') as hankukeo:
-            hankukeo_dict = json.load(hankukeo)
+    global hangugeo_dict
+    if hangugeo_dict is not None:
+        with open("hangugeo.json", 'r') as hangugeo:
+            hangugeo_dict = json.load(hangugeo)
     value = ord(single_korean)
     part_1 = (value - 44032) // 588
     part_2 = (value - 44032 - part_1 * 588) // 28
     part_3 = (value - 44032) % 28
     return {
         "org": single_korean,
-        "res_str": cheot[part_1] + " " + sok[part_2] + " " + kkeut[part_3],
-        "res": [cheot[part_1], sok[part_2], kkeut[part_3]],
+        "res_str": start[part_1] + " " + mid[part_2] + " " + end[part_3],
+        "res": [start[part_1], mid[part_2], end[part_3]],
         "value": [part_1, part_2, part_3],
     }
 
 
 def roma(korean, use_separate) -> dict:
-    global hankukeo_dict
-    if hankukeo_dict is not None:
-        with open("hankukeo.json", 'r') as hankukeo:
-            hankukeo_dict = json.load(hankukeo)
+    global hangugeo_dict
+    if hangugeo_dict is not None:
+        with open("hangugeo.json", 'r') as hangugeo:
+            hangugeo_dict = json.load(hangugeo)
     res = []
     last, now = False, False
     for mem in korean:
         if 44032 <= ord(mem) <= 55215:
             single_res = divide(mem)["res"]
             res.append(
-                hankukeo_dict["cheot"][single_res[0]] +
-                hankukeo_dict["sok"][single_res[1]] +
-                hankukeo_dict["kkeut"][single_res[2]]
+                hangugeo_dict["start"][single_res[0]] +
+                hangugeo_dict["mid"][single_res[1]] +
+                hangugeo_dict["end"][single_res[2]]
             )
             now = True
-        elif mem in cheot and mem != "ㅇ":
-            res.append(hankukeo_dict["cheot"][mem])
+        elif mem in start and mem != "ㅇ":
+            res.append(hangugeo_dict["start"][mem])
             now = True
-        elif mem in sok:
-            res.append(hankukeo_dict["sok"][mem])
+        elif mem in mid:
+            res.append(hangugeo_dict["mid"][mem])
             now = True
-        elif mem in kkeut and mem != "　":
-            res.append(hankukeo_dict["kkeut"][mem])
+        elif mem in end and mem != " ":
+            res.append(hangugeo_dict["end"][mem])
             now = True
         else:
             res.append(mem)
