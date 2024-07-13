@@ -6,7 +6,7 @@ A lightweight GUI application that **transliterates Hangul into Roman script**, 
 
 ## How to use?
 
-Download the latest release, open the binary file `hangugeo-UI.exe`, enter Hangul on the left and you'll see the output on the right.
+Download the latest release, open the binary file `hangugeo-roma.exe`, enter Hangul on the left and you'll see the output on the right.
 
 ## Feature
 
