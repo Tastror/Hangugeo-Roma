@@ -35,7 +35,7 @@ class HangugeoFrame(wx.Frame):
 
         # create a status bar
         self.CreateStatusBar()
-        self.SetStatusText("Welcome to use Hangugeo-UI!")
+        self.SetStatusText("Welcome to Hangugeo-Roma!")
 
     # Bars
     def menu_bar_init(self):
@@ -56,7 +56,7 @@ class HangugeoFrame(wx.Frame):
         # platforms that support it those letters are underlined and can be
         # triggered from the keyboard.
         menu_bar = wx.MenuBar()
-        menu_bar.Append(file_menu, "&File")
+        menu_bar.Append(file_menu, "&Edit")
         menu_bar.Append(help_menu, "&Help")
 
         # Give the menu bar to the frame
@@ -76,7 +76,7 @@ class HangugeoFrame(wx.Frame):
     def on_usage(self, event):
         self.placeholder = None
         wx.MessageBox(
-            "Type Hangul in the left, and the Roman-Form will be show in the right.",
+            "Enter Hangul on the left, and the Romanized form will be displayed on the right.",
             "Usage"
         )
 
@@ -90,7 +90,7 @@ class HangugeoFrame(wx.Frame):
 
     def on_about(self, event):
         self.placeholder = None
-        wx.MessageBox("Welcome to use Hangugeo-UI", "About Hangugeo-UI", wx.OK | wx.ICON_INFORMATION)
+        wx.MessageBox("Welcome to Hangugeo-Roma!\nAuthor: Tastror", "About Hangugeo-Roma", wx.OK | wx.ICON_INFORMATION)
 
     def update(self, event):
         self.show_textbox.SetValue(hangugeo.roma(self.type_in_textbox.GetValue(), self.separate)["res_str"])
@@ -98,6 +98,6 @@ class HangugeoFrame(wx.Frame):
 
 if __name__ == '__main__':
     app = wx.App()
-    frm = HangugeoFrame(None, title='Hangugeo-UI')
+    frm = HangugeoFrame(None, title='Hangugeo-Roma')
     frm.Show()
     app.MainLoop()
